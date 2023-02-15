@@ -1,0 +1,13 @@
+.home {
+    display: flex;
+    width: 100%;
+
+    .homeContainer {
+        flex: 6;
+    }
+}
+
+body {
+    overflow: hidden;
+    /* Hide scrollbars */
+}

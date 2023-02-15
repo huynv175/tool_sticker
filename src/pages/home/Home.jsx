@@ -1,0 +1,19 @@
+import React from "react";
+import "./home.scss"
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
+import SetTable from "../../components/settable/SetTable";
+
+const Home = () => {
+  return (
+    <div className="home">
+      <Sidebar />
+      <div className="homeContainer">
+        <Navbar />
+        <SetTable />
+      </div>
+    </div>
+  )
+}
+
+export default Home;
