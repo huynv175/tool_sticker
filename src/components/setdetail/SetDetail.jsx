@@ -8,6 +8,8 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 import EditPopup from '../editpopup/EditPopup'
+import DeletePopup from '../deletepopup/DeletePopup'
+
 
 import { Button, Avatar, Typography } from '@mui/material';
 
@@ -19,7 +21,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function SetDetail({ set }) {
-    const [popup, setPopup] = useState(false)
+    const [editPopup, setEditPopup] = useState(false)
+    const [deletePopup, setDeletePopup] = useState(false)
     return (
         <Box sx={{ flexGrow: 1, padding: "20px" }}>
             <Grid container spacing={2} style={{ display: "flex", alignItems: "center" }}>
@@ -39,20 +42,24 @@ export default function SetDetail({ set }) {
                     </Item>
                 </Grid>
                 <Grid xs={4} md={1} >
-                    <Button variant="outlined" startIcon={<EditIcon />} onClick={() => setPopup(true)}>
+                    <Button variant="outlined" startIcon={<EditIcon />} onClick={() => setEditPopup(true)}>
                         Edit Set
                     </Button>
                 </Grid>
                 <Grid xs={4} md={1} >
-                    <Button variant="outlined" startIcon={<DeleteIcon />}  >Delete Set</Button>
+                    <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => setDeletePopup(true)} >Delete Set</Button>
                 </Grid>
                 <Grid xs={4} md={1} >
                     <Button variant="outlined" startIcon={<AddIcon />} >Add Sticker</Button>
                 </Grid>
             </Grid>
-            <EditPopup open={popup} setOpen={setPopup}>
-
+            <EditPopup open={editPopup} setOpen={setEditPopup}>
             </EditPopup>
+
+            <DeletePopup open={deletePopup} setOpen={setDeletePopup}>
+
+            </DeletePopup>
+
         </Box >
     );
 }
