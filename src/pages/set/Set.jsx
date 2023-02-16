@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 const Set = () => {
     // const queryParameters = new URLSearchParams(window.location.search)
     const { id } = useParams();
-    console.log(id)
     return (
         <div className="set">
             <Sidebar />

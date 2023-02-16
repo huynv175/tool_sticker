@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 
 
+
 const size = 10
 
 const columns = [
@@ -35,16 +36,11 @@ const columns = [
         renderCell: (params) => {
             const currentRow = params.row;
             const url = `/set/${currentRow.id}`
-            const onClick = (e) => {
-                return alert(JSON.stringify(currentRow, null, 4));
-            };
+
 
             return (
                 <Stack direction="row" spacing={3}>
                     <Button variant="outlined" color="warning" size="small" component={Link} to={url} >Detail</Button>
-                    <Button variant="outlined" color="warning" size="small" onClick={onClick}>EDIT</Button>
-                    <Button variant="outlined" color="error" size="small" onClick={onClick}>Delete</Button>
-
                 </Stack>
             );
         },
@@ -62,10 +58,10 @@ export default function SetTable() {
 
 
     useEffect(() => {
-        console.log(loading)
         const url = `http://sticker.tuntran.com/v1/sticker/sets?limit=${size}&offset=${page * size}`
         axios.get(url)
             .then(function (response) {
+                console.log(response)
                 const newSets = response.data.data.sets
                 newSets.forEach((element) => {
                     if (element.thumb_cdn === "") {
@@ -93,7 +89,10 @@ export default function SetTable() {
                 rows={sets}
                 columns={columns}
                 pageSize={size}
-                onPageChange={(newPage) => setPage(newPage)}
+                onPageChange={(newPage) => {
+                    setPage(newPage)
+                    setLoading(true)
+                }}
                 paginationMode="server"
                 rowsPerPageOptions={[10]}
                 disableColumnMenu

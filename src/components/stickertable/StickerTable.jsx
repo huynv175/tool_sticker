@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Loading from '../loading/Loading';
 
 import { DataGrid } from '@mui/x-data-grid';
-import { Avatar, Typography } from '@mui/material';
+import SetDetail from '../setdetail/SetDetail'
 
 
 const size = 10
@@ -61,20 +61,22 @@ export default function StickerTable({ id }) {
 
 
     return loading ? (<Loading />) : (
-        <div className='stickertable'>
-            <div className='set'>
-                <Avatar alt={set.name} src={set.thumb_cdn} />
-                <Typography align='center'>Sticker Set: {set.name}</Typography>
+        <div>
+            <div className='setdetail'><SetDetail set={set} /></div>
+            <div className='stickertable'>
+                <DataGrid
+                    getRowHeight={() => 'auto'}
+                    rows={packs}
+                    columns={columns}
+                    pageSize={size}
+                    rowsPerPageOptions={[5, 10]}
+                    getRowId={(pack) => pack.document_id}
+                    disableColumnMenu
+                    disableColumnFilter
+                    disableColumnSelector
+                />
+
             </div>
-            <DataGrid
-                sx={{ overflow: "hidden" }}
-                getRowHeight={() => 'auto'}
-                rows={packs}
-                columns={columns}
-                pageSize={size}
-                rowsPerPageOptions={[5, 10]}
-                getRowId={(pack) => pack.document_id}
-            />
         </div>
 
 
